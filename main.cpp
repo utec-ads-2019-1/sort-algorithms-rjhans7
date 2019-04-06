@@ -2,8 +2,8 @@
 #include <assert.h>
 #include <string>
 
-#include "mocker.h"
-#include "tester.h"
+#include "mocker.cpp"
+#include "tester.cpp"
 #include "bubble.h"
 #include "select.h"
 #include "insert.h"
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define NUMBER_OF_TESTS 10
+#define NUMBER_OF_TESTS 100
 
 Mocker mocker;
 
@@ -31,11 +31,18 @@ int main(int argc, char* argv[]) {
     return EXIT_SUCCESS;
 }
 
+void compareIntegers(void *elements, int first, int second) {
+    int *array = (int*) elements;
+    if (array[first] > array[second]) {
+        swap(array[first], array[second]);
+    }
+}
+
 void executeTests() {
     for (int i = 0; i < NUMBER_OF_TESTS; ++i) {
         size_t size = mocker.generateRandomInt();
         int *array = mocker.generateRandomIntArray(size);
-        Tester::integerSorts(array, size);
+        Tester::integerSorts(array, size, compareIntegers);
         cout << "Passed test: " << i + 1 << endl;
     }
 }
