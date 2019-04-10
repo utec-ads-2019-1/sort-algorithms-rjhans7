@@ -2,8 +2,8 @@
 #include <assert.h>
 #include <string>
 
-#include "mocker.h"
-#include "tester.h"
+#include "mocker.cpp"
+#include "tester.cpp"
 #include "bubble.h"
 #include "select.h"
 #include "insert.h"
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define NUMBER_OF_TESTS 10
+#define NUMBER_OF_TESTS 100
 
 Mocker mocker;
 
