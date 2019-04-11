@@ -28,10 +28,9 @@ void integersInsert(void *elements, int first, int second) {
 void integersShell(void *elements, int start, int gap){
     int *array = (int*) elements;
     int temp =array[start];
-    int i;
-    for ( i= start; i>=gap && array[i-gap]>temp; i-=gap  )
+    for ( int i= start; i>=gap && array[i-gap]>temp; i-=gap  ){
         array[i]=array[i-gap];
-    array[i]=temp;
+        array[i]=temp;}
 }
 
 
