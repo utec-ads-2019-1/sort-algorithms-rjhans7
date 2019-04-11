@@ -7,12 +7,13 @@ class InsertSort : public Sort {
     public:
         InsertSort(void *elements, size_t size) : Sort(elements, size) {}
 
+
         void execute(void (*compare)(void*, int, int)) {
-            for (int i=1; i < size; ++i){
-            	for (int j = i; j>0; --j){
-            		compare(elements,j, j-1);
-            	}
-            }
+            for (int i = 1; i< size; i++ )
+                for (int j=i; j>0; j--)
+                    compare(elements,j,j-1);
+
+
         }
 
         inline string name() { return "InsertSort"; }
