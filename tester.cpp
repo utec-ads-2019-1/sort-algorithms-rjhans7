@@ -27,10 +27,32 @@ void integersInsert(void *elements, int first, int second) {
 
 void integersShell(void *elements, int start, int gap){
     int *array = (int*) elements;
-    int temp =array[start];
-    for ( int i= start; i>=gap && array[i-gap]>temp; i-=gap  ){
+    int temp =array[start], i;
+    for ( i= start; i>=gap && array[i-gap]>temp; i-=gap  )
         array[i]=array[i-gap];
-        array[i]=temp;}
+    array[i]=temp;
+}
+
+int partitionQuickSort(void *elements, int start, int end){
+    int *array = (int*) elements;
+    int pivot = array[end], idx=(start-1);
+    for (int j = start; j <= end-1; j++)
+        if (array[j]<= pivot){
+            idx++;
+            swap(array[idx],array[j]);
+        }
+    swap(array[idx+1], array[end]);
+    return idx+1;
+
+
+}
+void integersQuick(void *elements, int start, int end){
+    if (start < end){
+        int partition =partitionQuickSort(elements,start,end);
+        integersQuick(elements, start, partition-1);
+        integersQuick(elements, partition+1, end);
+    }
+
 }
 
 
@@ -52,6 +74,7 @@ fptr Tester::getCompare(Algorithm sort) {
         case selectsort: return &integersSelect;
         case insertsort: return &integersInsert;
         case shellsort: return &integersShell;
+        case quicksort: return &integersQuick;
         default: throw invalid_argument("Not a valid comparer");
     }
 }
@@ -60,13 +83,15 @@ void Tester::integerSorts(int *array, size_t size) {
     Sort* sort;
     int temp[size];
 
-    Algorithm algorithm[] = {shellsort /*, selectsort, insertsort, shellsort, quicksort, mergesort*/ };
+    Algorithm algorithm[] = {bubblesort, selectsort, insertsort, shellsort, quicksort/*, mergesort*/ };
     size_t numberOfAlgorithms = sizeof(algorithm) / sizeof(algorithm[0]);
 
     for (int i = 0; i < numberOfAlgorithms; i++) {
         copy(array, array + size, temp);
         sort = getSort(algorithm[i], temp, size);
         sort->execute(getCompare(algorithm[i]));
+        cout <<sort->name()<<endl;
+        //sort->showIntegers(); //usar cuando se quiere probar un sort a la vez y se quiere ver los números
         ASSERT(is_sorted(temp, temp + size), "The " + sort->name() + " is not ordering all the elements");
     }
 }
