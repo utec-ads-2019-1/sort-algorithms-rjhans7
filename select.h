@@ -9,15 +9,9 @@ public:
 
 
     void execute(void (*compare)(void*, int, int)) {
-        int idxMin;
-        for (int i =0; i<size-1; i++){
-            idxMin = i;
-            for (int j = i+1; j<size; j++){
-                compare(elements, idxMin,j);
-            }
-        }
+        for (int i = 0; i< size-1; i++ )
+            compare(elements, i, size);
     }
-
     inline string name() { return "SelectSort"; }
 };
 
