@@ -8,7 +8,7 @@ class QuickSort : public Sort {
         QuickSort(void *elements, size_t size) : Sort(elements, size) {}
 
         void execute(void (*compare)(void*, int, int)) {
-
+            compare (elements, 0, size-1);
         }
 
         inline string name() { return "QuickSort"; }

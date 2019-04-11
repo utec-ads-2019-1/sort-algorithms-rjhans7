@@ -1,5 +1,5 @@
 #include <iostream>
-#include <assert.h>
+#include <cassert>
 #include <string>
 
 #include "mocker.cpp"
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define NUMBER_OF_TESTS 100
+#define NUMBER_OF_TESTS 2
 
 Mocker mocker;
 

@@ -18,6 +18,12 @@ class Sort {
 
         virtual string name() = 0;
 
+        void showIntegers(){
+            int *array = (int*) elements;
+            for(int i=0;i<size-1; i++)
+                cout <<array[i]<<endl;
+        }
+
 };
 
 #endif
